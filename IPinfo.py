@@ -2,13 +2,17 @@ import requests, csv
 
 def get_ip_data(ip_address):
     url = f"http://ip-api.com/csv/{ip_address}"
-    response = requests.get(url)
+    try:
+        response = requests.get(url)
+    except:
+        print("\nNetwork error, check your connection.\n")
+        return None
     
     if response.status_code == 200:
         data = response.text.split(',')
         
         if "invalid query" in data:
-            print("Invalid IP address.")
+            print("\nInvalid IP address.\n")
             return None
         
         ip_data = {
@@ -46,11 +50,11 @@ def get_ip_data(ip_address):
         
         return ip_data
     else:
-        print("Error in requesting data from the site. Status code:", response.status_code)
+        print(f"\nError in requesting data from the site. Status code: {response.status_code}")
         return None
 
 def main():
-    print(" ___ ____  _        __\n|_ _|  _ \(_)_ __  / _| ___\n | || |_) | | '_ \| |_ / _ \\\n | ||  __/| | | | |  _| (_) |\n|___|_|   |_|_| |_|_|  \___/\nMade by DHackerMe | v1.0")
+    print(" ___ ____  _        __\n|_ _|  _ \(_)_ __  / _| ___\n | || |_) | | '_ \| |_ / _ \\\n | ||  __/| | | | |  _| (_) |\n|___|_|   |_|_| |_|_|  \___/\nMade by DHackerMe | v1.1")
     ip_address = input("\nEnter an IP address: ")
     get_ip_data(ip_address)
 
