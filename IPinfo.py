@@ -50,7 +50,7 @@ def get_ip_data(ip_address):
         
         return ip_data
     else:
-        print(f"\nError in requesting data from the site. Status code: {response.status_code}")
+        print(f"\nError in requesting data from the site. Status code: {response.status_code}\n")
         return None
 
 def main():
